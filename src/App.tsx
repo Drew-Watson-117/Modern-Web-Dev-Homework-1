@@ -1,34 +1,46 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { SearchBar } from './components/SearchBar/SearchBar'
+import { RandomQuote } from './components/RandomQuote/RandomQuote'
+import { Quote } from './components/Quote/Quote'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [quotes, setQuotes] = useState([]);
+
+  async function search(e: any) {
+    //Prevent reload
+    e.preventDefault();
+    //Make API call
+    let searchText = e.target.elements["searchBar"].value;
+    const response = await fetch(`https://api.quotable.io/search/quotes?query=${searchText}&fields=author`)
+            .then(response=>{return response.json()})
+            .then(data=>{
+                setQuotes(data.results);
+            });
+    
+    console.log("Submitted");
+    
+  }
+
+  const renderQuotes = (quotes: any) => {
+    if(quotes !== undefined){
+      return quotes.map((quote: any) => <Quote author={quote.author} quote={quote.content}></Quote>)
+    }
+    else{
+      return <RandomQuote></RandomQuote>
+    }
+  }
+  
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1> Quote Search </h1>
+      <SearchBar onSearch={search}></SearchBar>
+      {renderQuotes(quotes)}
     </div>
-  )
+  );
+
 }
 
 export default App

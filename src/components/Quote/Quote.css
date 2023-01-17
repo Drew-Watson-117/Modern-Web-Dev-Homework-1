@@ -1,0 +1,22 @@
+.background{
+    padding-left: 10%;
+    padding-right: 10%;
+    border-radius: 2rem;
+    border-color: gray;
+    border-width: 0.2rem;
+    border-style: solid;
+}
+
+.content{
+    margin-left: 0%;
+    margin-right: 0%;
+    font-family: Helvetica;
+    text-align: left;
+}
+
+.author{
+    margin-left: 0%;
+    margin-right: 0%;
+    font-family: Helvetica;
+    text-align: left;
+}
