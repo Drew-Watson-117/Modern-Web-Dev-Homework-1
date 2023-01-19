@@ -6,7 +6,7 @@ import './App.css'
 
 function App() {
 
-  const [quotes, setQuotes] = useState([]);
+  const [quotes, setQuotes] = useState(undefined);
 
   async function search(e: any) {
     //Prevent reload
@@ -24,8 +24,17 @@ function App() {
   }
 
   const renderQuotes = (quotes: any) => {
-    if(quotes !== undefined){
+    if(quotes !== undefined && quotes.length > 0){
       return quotes.map((quote: any) => <Quote author={quote.author} quote={quote.content}></Quote>)
+    }
+    else if(quotes !== undefined && quotes.length === 0){
+      return (
+        <div>
+          <p>No quotes found for that search term</p>
+          <RandomQuote></RandomQuote>
+        </div>
+        
+      );
     }
     else{
       return <RandomQuote></RandomQuote>
