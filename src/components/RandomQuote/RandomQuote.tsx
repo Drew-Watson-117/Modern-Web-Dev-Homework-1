@@ -7,7 +7,7 @@ export function RandomQuote(){
 
     React.useEffect(()=>{
         const fetchRandomQuote = async () => {
-            const response = await fetch("https://api.quotable.io/random")
+            const response = await fetch("https://usu-quotes-mimic.vercel.app/api/random")
                 .then(response=>{return response.json()})
                 .then(data=>{
                     setQuote(data.content);
