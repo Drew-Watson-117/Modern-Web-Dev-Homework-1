@@ -8,9 +8,6 @@ interface Quote {
   _id: string,
   content: string,
   author: string,
-  authorSlug: string,
-  length: number,
-  tags?: any
 }
 
 function App() {
@@ -31,7 +28,7 @@ function App() {
 
   const renderQuotes = (quotes: any) => {
     if(searchSuccess){
-      return quotes.map((quote: any) => <Quote author={quote.author} quote={quote.content}></Quote>);
+      return quotes.map((quote: any) => <Quote key={quote._id} author={quote.author} quote={quote.content}></Quote>);
     }
     else{
       return (
