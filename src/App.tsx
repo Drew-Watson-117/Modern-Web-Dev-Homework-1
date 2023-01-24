@@ -19,11 +19,12 @@ function App() {
     const response = await fetch(`https://usu-quotes-mimic.vercel.app/api/search?query=${searchText}`)
             .then(response=>{return response.json()})
             .then(data=>{
-                setQuotes(data.results);
+                setQuotes(() => data.results);
+                quotes.length > 0 ? setSearchSuccess(true) : setSearchSuccess(false);
+                console.log("Submitted");
+                console.log(quotes);
+                console.log(searchSuccess);
             });
-    quotes.length > 0 ? setSearchSuccess(true) : setSearchSuccess(false);
-    console.log("Submitted");
-    
   }
 
   const renderQuotes = (quotes: any) => {
