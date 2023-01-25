@@ -24,9 +24,9 @@ function App() {
             });
   }
 
-  const renderQuotes = (quotes: any) => {
+  const renderQuotes = (quotes: Quote[]) => {
     if(searchSuccess){
-      return quotes.map((quote: any) => <Quote key={quote._id} author={quote.author} quote={quote.content}></Quote>);
+      return quotes.map((quote: Quote) => <Quote key={quote._id} author={quote.author} quote={quote.content}></Quote>);
     }
     else{
       return (
